@@ -20,3 +20,6 @@ ENV:
   - 'QAS'
   - 'QAT'
   - 'PPR'
+  
+DOCKER:
+  IMAGE: 'docker-bld:repo:aligntech:com/si/si-testing'
