@@ -1,5 +1,5 @@
 // vars/loadConfig.groovy
-def configCache = null
+static def configCache = null
 
 // Static method to load the YAML content (only once)
 static def loadYamlContent() {
