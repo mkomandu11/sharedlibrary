@@ -1,18 +1,19 @@
 // vars/loadConfig.groovy
-def configCache = null
+def cache = [:]  // A global map to store cached values
 
-// Instance method to load the YAML content (only once)
+// Method to load the YAML content (only once)
 def loadYamlContent() {
-    if (configCache == null) {
+    if (!cache.containsKey('config')) {
+        // Load and cache the YAML content
         def yamlContent = libraryResource('config.yml')
-        configCache = readYaml text: yamlContent
+        cache['config'] = readYaml text: yamlContent
     }
-    return configCache
+    return cache['config']
 }
 
-// Instance method to get specific key values by keyPath
+// Method to get specific key values by keyPath
 def getConfigValue(String keyPath) {
-    def config = loadYamlContent()
+    def config = loadYamlContent()  // Load the config (from cache or fresh)
     def keys = keyPath.split('\\.')
     def value = config
     for (key in keys) {
@@ -24,21 +25,21 @@ def getConfigValue(String keyPath) {
     return value
 }
 
-// Instance method to get the 'HOSTS' as a single string
+// Method to get the 'HOSTS' as a single string
 def getHosts() {
     def hosts = getConfigValue('HOSTS')
     if (hosts instanceof List) {
-        return hosts.join(', ')
+        return hosts.join(', ')  // Join the list into a string
     }
     error "HOSTS is not a list in the configuration."
 }
 
-// Instance method to get the 'environment.name'
+// Method to get the 'environment.name'
 def getEnvironmentName() {
     return getConfigValue('environment.name')
 }
 
-// Instance method to get the 'database.host'
+// Method to get the 'database.host'
 def getDatabaseHost() {
     return getConfigValue('database.host')
 }
