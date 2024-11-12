@@ -6,7 +6,7 @@ class ConfigLoader {
     static def loadConfig() {
         if (!configCache) {
             // Read the YAML content from the resources folder
-            def yamlContent = libraryResource('config.yml')
+            def yamlContent = libraryResource('config.yaml')
             configCache = readYaml text: yamlContent
         }
         return configCache
