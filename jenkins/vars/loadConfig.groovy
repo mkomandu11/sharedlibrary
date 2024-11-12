@@ -1,11 +1,26 @@
 // vars/loadConfig.groovy
-
 def call(String keyPath = null) {
-    // If no key path is provided, return the entire config
-    if (!keyPath) {
-        return ConfigLoader.loadConfig()  // Return entire config
+    // Load the YAML file content from the hardcoded path
+    def yamlContent = libraryResource('config.yml')
+    def config = readYaml text: yamlContent
+
+    // If a specific keyPath is requested, navigate the config map
+    if (keyPath) {
+        def keys = keyPath.split('\\.')
+        def value = config
+        for (key in keys) {
+            value = value[key]
+            if (value == null) {
+                error "Key path '${keyPath}' not found in configuration."
+            }
+        }
+        if (keyPath == 'HOSTS' ) {
+            return value.join('--add-host')
+        }
+
+        return value
     }
 
-    // Otherwise, return the specific value for the provided key path
-    return ConfigLoader.getConfigValue(keyPath)
+    // Return the entire config if no specific keyPath is provided
+    return config
 }
