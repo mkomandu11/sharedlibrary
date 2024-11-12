@@ -5,11 +5,11 @@ pipeline {
         stage('Load Specific YAML Entries') {
             steps {
                 script {
-                    // Directly use static methods to fetch specific entries
-                    def environmentName = loadConfig.getEnvironmentName()
-                    def databaseHost = loadConfig.getDatabaseHost()
-                    def hostsString = loadConfig.getHosts()
-                    
+                    def configLoader = loadConfig.new() // Create an instance of the class
+                    def environmentName = configLoader.getEnvironmentName()
+                    def databaseHost = configLoader.getDatabaseHost()
+                    def hostsString = configLoader.getHosts()
+
                     // Output the values
                     echo "Environment Name: ${environmentName}"
                     echo "Database Host: ${databaseHost}"
