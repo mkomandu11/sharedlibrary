@@ -5,11 +5,11 @@ pipeline {
         stage('Load Specific YAML Entries') {
             steps {
                 script {
-                    // Call the methods directly without needing an instance
-                    def environmentName = loadConfig.getEnvironmentName()  // Access instance method
-                    def databaseHost = loadConfig.getDatabaseHost()  // Access instance method
-                    def hostsString = loadConfig.getHosts()  // Access instance method
-                    
+                    // Call the methods directly to retrieve values from YAML config
+                    def environmentName = loadConfig.getEnvironmentName()
+                    def databaseHost = loadConfig.getDatabaseHost()
+                    def hostsString = loadConfig.getHosts()
+
                     // Output the values
                     echo "Environment Name: ${environmentName}"
                     echo "Database Host: ${databaseHost}"
