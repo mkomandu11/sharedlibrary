@@ -15,7 +15,7 @@ def call(String keyPath = null) {
             }
         }
         if (keyPath == 'HOSTS' ) {
-            return value.join('--add-host')
+            return value.join(' --add-host ')
         }
 
         return value
