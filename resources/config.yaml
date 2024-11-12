@@ -1,0 +1,8 @@
+# resources/config.yml
+environment:
+  name: production
+  url: https://prod.example.com
+database:
+  host: db.prod.example.com
+  port: 5432
+  user: admin
