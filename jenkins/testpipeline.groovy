@@ -1,15 +1,15 @@
-@Library('jenkins-shared-library-example') _  // Ensure your library is loaded
+@Library('jenkins-shared-library-example') _  // Load the shared library
 pipeline {
     agent any
     stages {
-        stage('Load Specific YAML Entries') {
+        stage('Load YAML Data') {
             steps {
                 script {
-                    // Call the methods directly to retrieve values from YAML config
-                    def environmentName = loadConfig.getEnvironmentName()
-                    def databaseHost = loadConfig.getDatabaseHost()
-                    def hostsString = loadConfig.getHosts()
-
+                    // Access static methods directly through the class
+                    def environmentName = LoadConfig.getEnvironmentName()
+                    def databaseHost = LoadConfig.getDatabaseHost()
+                    def hostsString = LoadConfig.getHosts()
+                    
                     // Output the values
                     echo "Environment Name: ${environmentName}"
                     echo "Database Host: ${databaseHost}"
