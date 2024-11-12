@@ -13,3 +13,10 @@ HOSTS:
   - 'ace2.acelab.com:10:10:10:10'
   - 'ace3.acelab.com:10:10:10:10'
   - 'ace4.acelab.com:10:10:10:10'
+  
+TREAT_VERSION: '15.34.0.20'
+
+ENV:
+  - 'QAS'
+  - 'QAT'
+  - 'PPR'
