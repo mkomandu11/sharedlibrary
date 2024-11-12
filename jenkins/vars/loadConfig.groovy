@@ -1,7 +1,7 @@
 // vars/loadConfig.groovy
 def call(String keyPath = null) {
     // Load the YAML file content from the hardcoded path
-    def yamlContent = libraryResource('config.yml')
+    def yamlContent = libraryResource('config.yaml')
     def config = readYaml text: yamlContent
 
     // If a specific keyPath is requested, navigate the config map
