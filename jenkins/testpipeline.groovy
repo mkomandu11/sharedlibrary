@@ -18,7 +18,7 @@ pipeline {
                     def dbHost = loadConfig('database.host')
                     echo "Database Host: ${dbHost}"
 
-                    def hosts = loadConfig('hosts')
+                    def hosts = loadConfig('HOSTS')
                     echo "Hosts: ${hosts}"
                 }
             }
