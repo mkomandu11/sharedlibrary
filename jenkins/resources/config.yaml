@@ -1,14 +1,15 @@
-# resources/config.yml
 environment:
   name: production
   url: https://prod.example.com
+
 database:
   host: db.prod.example.com
   port: 5432
   user: admin
+
 HOSTS:
-  'ace.acelab.com:10:10:10:10'
-  'ace1.acelab.com:10:10:10:10'
-  'ace2.acelab.com:10:10:10:10'
-  'ace3.acelab.com:10:10:10:10'
-  'ace4.acelab.com:10:10:10:10'
+  - 'ace.acelab.com:10:10:10:10'
+  - 'ace1.acelab.com:10:10:10:10'
+  - 'ace2.acelab.com:10:10:10:10'
+  - 'ace3.acelab.com:10:10:10:10'
+  - 'ace4.acelab.com:10:10:10:10'
