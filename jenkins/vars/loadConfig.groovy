@@ -1,26 +1,30 @@
-// vars/loadConfig.groovy
+
+
 def call(String keyPath = null) {
-    // Load the YAML file content from the hardcoded path
-    def yamlContent = libraryResource('config.yaml')
-    def config = readYaml text: yamlContent
 
-    // If a specific keyPath is requested, navigate the config map
-    if (keyPath) {
-        def keys = keyPath.split('\\.')
-        def value = config
-        for (key in keys) {
-            value = value[key]
-            if (value == null) {
-                error "Key path '${keyPath}' not found in configuration."
-            }
-        }
-        if (keyPath == 'HOSTS' ) {
-            return value.join(' --add-host ')
-        }
+    def yamlContent = libraryResource('config.yml')  //
+    def config = readYaml text: yamlContent  //
 
-        return value
+
+    if (!keyPath) {
+        return config
     }
 
-    // Return the entire config if no specific keyPath is provided
-    return config
+
+    def keys = keyPath.split('\\.')
+    def value = config
+    for (key in keys) {
+        value = value[key]
+        if (value == null) {
+            error "Key path '${keyPath}' not found in configuration."
+        }
+    }
+
+
+    if (keyPath == 'HOSTS') {
+
+        return value.collect { '--add-host ' + it }.join(' ')
+    }
+
+    return value
 }
