@@ -2,7 +2,7 @@
 
 def call(String keyPath = null) {
 
-    def yamlContent = libraryResource('config.yml')  //
+    def yamlContent = libraryResource('config.yaml')  //
     def config = readYaml text: yamlContent  //
 
 
