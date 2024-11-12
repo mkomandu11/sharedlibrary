@@ -1,15 +1,15 @@
-@Library('jenkins-shared-library-example') _
+@Library('jenkins-shared-library-example') _  // Ensure your library is loaded
 pipeline {
     agent any
     stages {
         stage('Load Specific YAML Entries') {
             steps {
                 script {
-                    def configLoader = loadConfig.new() // Create an instance of the class
-                    def environmentName = configLoader.getEnvironmentName()
-                    def databaseHost = configLoader.getDatabaseHost()
-                    def hostsString = configLoader.getHosts()
-
+                    // Call the methods directly without needing an instance
+                    def environmentName = loadConfig.getEnvironmentName()  // Access instance method
+                    def databaseHost = loadConfig.getDatabaseHost()  // Access instance method
+                    def hostsString = loadConfig.getHosts()  // Access instance method
+                    
                     // Output the values
                     echo "Environment Name: ${environmentName}"
                     echo "Database Host: ${databaseHost}"
