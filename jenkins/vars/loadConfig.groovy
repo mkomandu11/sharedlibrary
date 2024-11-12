@@ -1,5 +1,7 @@
 // vars/loadConfig.groovy
-@Field def cache = [:]  // Static-like variable for caching
+
+// Global cache variable (use standard Groovy variable without @Field)
+def cache = [:]  // Static-like variable for caching
 
 // Define the main entry point using the `call` method
 def call(String keyPath = null) {
