@@ -2,24 +2,27 @@
 
 pipeline {
     agent any
-
+   environment{
+        HOSTS=loadConfig('HOSTS')
+        DOCKER_IMAGE=loadConfig('DOCKER.IMAGE')
+    }
+    parameters {
+        choice(name: 'ENV', choices: loadConfig('ENV'), description: 'Stage Environment')
+        string(
+            defaultValue: loadConfig('TREAT_VERSION'),
+            name: 'TREAT_VERSION',
+            trim: true
+        )
+       }
     stages {
         stage('Fetch Config') {
             steps {
                 script {
                     // Fetch the entire config as a map
-                    def config = loadConfig()
-                    echo "Full Config: ${config}"
-
-                    // Fetch a specific value from the config
-                    def envName = loadConfig('environment.name')
-                    echo "Environment Name: ${envName}"
-
-                    def dbHost = loadConfig('database.host')
-                    echo "Database Host: ${dbHost}"
-
-                    def hosts = loadConfig('HOSTS')
-                    echo "Hosts: ${hosts}"
+                    echo "Hosts: ${HOSTS}"
+                    echo "Docker Image :${DOCKER_IMAGE}"
+                    echo "$params.ENV"
+                    echo "$params.TREAT_VERSION"
                 }
             }
         }
