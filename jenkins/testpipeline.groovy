@@ -1,20 +1,25 @@
-@Library('jenkins-shared-library-example') _  // Load the shared library
+@Library('my-shared-library') _  // Load the shared library
 
 pipeline {
     agent any
+
     stages {
-        stage('Load YAML Data') {
+        stage('Fetch Config') {
             steps {
                 script {
-                    // Call the shared library directly with or without keyPath
-                    def environmentName = loadConfig('environment.name')  // Get specific value
-                    def databaseHost = loadConfig('database.host')        // Get specific value
-                    def hostsString = loadConfig('HOSTS')                  // Get HOSTS as a string
-                    
-                    // Output the values
-                    echo "Environment Name: ${environmentName}"
-                    echo "Database Host: ${databaseHost}"
-                    echo "Hosts: ${hostsString}"
+                    // Fetch the entire config as a map
+                    def config = loadConfig()
+                    echo "Full Config: ${config}"
+
+                    // Fetch a specific value from the config
+                    def envName = loadConfig('environment.name')
+                    echo "Environment Name: ${envName}"
+
+                    def dbHost = loadConfig('database.host')
+                    echo "Database Host: ${dbHost}"
+
+                    def hosts = loadConfig('hosts')
+                    echo "Hosts: ${hosts}"
                 }
             }
         }
